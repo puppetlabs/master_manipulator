@@ -1,6 +1,5 @@
 module MasterManipulator
   module Service
-    extend Beaker::DSL
 
     # Restart the puppet server and wait for it to come back up
     # ==== Attributes
@@ -14,7 +13,7 @@ module MasterManipulator
     # ==== Example
     # restart_puppet_server(master)
     # restart_puppet_server(master, {:time_out => 200, :frequency => 10})
-    def self.restart_puppet_server(host, opts = {})
+    def restart_puppet_server(host, opts = {})
 
       on(host, "puppet resource service pe-puppetserver ensure=stopped")
       on(host, "puppet resource service pe-puppetserver ensure=running")
