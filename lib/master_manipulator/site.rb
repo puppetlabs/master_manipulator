@@ -1,6 +1,5 @@
 module MasterManipulator
   module Site
-    extend Beaker::DSL
 
     # Create a "site.pp" file with file bucket enabled. Also, allow
     # the creation of a custom node definition or use the 'default'
@@ -19,7 +18,7 @@ module MasterManipulator
     # ==== Examples
     #
     # site_pp = create_site_pp(master_host, '', node_def_name='agent')
-    def self.create_site_pp(master_host, opts = {})
+    def create_site_pp(master_host, opts = {})
       opts[:manifest] ||= ''
       opts[:node_def_name] ||= 'default'
       master_certname = on(master, puppet('config print certname')).stdout.rstrip
@@ -71,7 +70,7 @@ MANIFEST
     # ==== Examples
     #
     # set_perms_on_remote(master, "/tmp/test/site.pp", "777")
-    def self.set_perms_on_remote(host, path, mode, opts = {})
+    def set_perms_on_remote(host, path, mode, opts = {})
       opts[:owner] ||= nil
       opts[:group] ||= nil
 
@@ -103,7 +102,7 @@ MANIFEST
     # ==== Examples
     #
     # site_pp = inject_site_pp(master_host, "/tmp/test/site.pp", manifest)
-    def self.inject_site_pp(master_host, site_pp_path, manifest)
+    def inject_site_pp(master_host, site_pp_path, manifest)
       site_pp_dir = File.dirname(site_pp_path)
       create_remote_file(master_host, site_pp_path, manifest)
 

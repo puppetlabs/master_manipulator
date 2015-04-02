@@ -1,6 +1,5 @@
 module MasterManipulator
   module Config
-    extend Beaker::DSL
 
     # Disable the Node Classifier on the Puppet master.
     # (Note: this requires a restart of Puppet Server to take affect.)
@@ -15,7 +14,7 @@ module MasterManipulator
     # ==== Examples
     #
     # site_pp = disable_node_classifier(master_host)
-    def self.disable_node_classifier(master_host)
+    def disable_node_classifier(master_host)
       on(master_host, puppet('config set node_terminus plain --section master'))
     end
 
@@ -32,7 +31,7 @@ module MasterManipulator
     # ==== Examples
     #
     # site_pp = disable_node_classifier(master_host)
-    def self.disable_env_cache(master_host)
+    def disable_env_cache(master_host)
       on(master_host, puppet('config set environment_timeout 0 --section main'))
     end
 
