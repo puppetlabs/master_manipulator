@@ -29,7 +29,7 @@ node default {
 MANIFEST
 
       node_def = <<-MANIFEST
-node #{node_def_name} {
+node #{opts[:node_def_name]} {
 
 #{opts[:manifest]}
 }
