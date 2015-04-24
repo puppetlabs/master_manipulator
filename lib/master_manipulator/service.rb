@@ -15,9 +15,9 @@ module MasterManipulator
     # restart_puppet_server(master, {:time_out => 200, :frequency => 10})
     def restart_puppet_server(host, opts = {})
 
-      on(host, "puppet resource service pe-puppetserver ensure=stopped")
-      on(host, "puppet resource service pe-puppetserver ensure=running")
-      masterHostName = on(host, "hostname").stdout.chomp
+      on(host, puppet('resource service pe-puppetserver ensure=stopped'))
+      on(host, puppet('resource service pe-puppetserver ensure=running'))
+      masterHostName = on(host, 'hostname').stdout.chomp
       opts[:time_out] ||= 100
       opts[:frequency] ||= 5
       i = 0
