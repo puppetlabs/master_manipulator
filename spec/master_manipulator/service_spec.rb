@@ -4,21 +4,30 @@ describe MasterManipulator::Service do
 
   let(:beaker_host)           { instance_double(Beaker::Host) }
   let(:beaker_command)        { instance_double(Beaker::Command) }
-  let(:beaker_result)         { instance_double(Beaker::Result) }
   let(:dummy_class)           { Class.new { extend MasterManipulator::Service } }
+  let(:cmd_1)                 { 'resource service pe-puppetserver ensure=stopped' }
+  let(:cmd_2)                 { 'resource service pe-puppetserver ensure=running' }
+  let(:cmd_3)                 { 'hostname' }
+
+  def shared_dsl_expectations
+    expect(dummy_class).to receive(:on).with(beaker_host, beaker_command).twice
+    expect(dummy_class).to receive(:puppet).with(cmd_1).and_return(beaker_command)
+    expect(dummy_class).to receive(:puppet).with(cmd_2).and_return(beaker_command)
+    expect(dummy_class).to receive(:on).with(beaker_host, cmd_3).and_return(beaker_result)
+  end
 
   describe '.restart_puppet_server' do
 
-    it 'with correct required arguement' do
-      cmd_1 = 'resource service pe-puppetserver ensure=stopped'
-      cmd_2 = 'resource service pe-puppetserver ensure=running'
-      cmd_3 = 'hostname'
+    let(:beaker_result)       { x = Beaker::Result.new('host', 'cmd')
+                                x.stdout = 'This is stdout'
+                                x.exit_code = '0'
+                                x
+                              }
 
-      expect(dummy_class).to receive(:on).with(beaker_host, beaker_command).and_return(beaker_result)
-      expect(dummy_class).to receive(:puppet).with(cmd_1).and_return(beaker_command)
-      expect(dummy_class).to receive(:puppet).with(cmd_2).and_return(beaker_command)
-      expect(dummy_class).to receive(:on).with(beaker_host, cmd_3).and_return(beaker_result)
-      expect(dummy_class.restart_puppet_server(beaker_host)).to eq(beaker_result)
+    it 'with correct required arguement' do
+      shared_dsl_expectations
+      expect(dummy_class).to receive(:curl_on).and_return(beaker_result)
+      expect{dummy_class.restart_puppet_server(beaker_host)}.not_to raise_error
     end
 
     it 'with too many arguements' do
@@ -27,6 +36,21 @@ describe MasterManipulator::Service do
 
     it 'with no arguements' do
       expect{ dummy_class.restart_puppet_server }.to raise_error(ArgumentError)
+    end
+
+    context 'negative cases' do
+
+      let(:beaker_result)     { x = Beaker::Result.new('host', 'cmd')
+                                x.stdout = 'This is stdout'
+                                x.exit_code = '7'
+                                x
+                              }
+
+      it 'puppet server never starts' do
+        shared_dsl_expectations
+        expect(dummy_class).to receive(:curl_on).exactly(10).times.and_return(beaker_result)
+        expect{ dummy_class.restart_puppet_server(beaker_host, {:time_out => 10}) }.to raise_error(StandardError, 'Attempting to restart the puppet server was not successful in the time alloted.')
+      end
     end
 
   end
