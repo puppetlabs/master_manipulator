@@ -71,9 +71,6 @@ MANIFEST
     #
     # set_perms_on_remote(master, "/tmp/test/site.pp", "777")
     def set_perms_on_remote(host, path, mode, opts = {})
-      opts[:owner] ||= nil
-      opts[:group] ||= nil
-
       if (opts[:owner].nil?)
         owner = on(host, puppet('config print user')).stdout.rstrip
       end
