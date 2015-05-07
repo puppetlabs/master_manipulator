@@ -21,7 +21,7 @@ module MasterManipulator
     def create_site_pp(master_host, opts = {})
       opts[:manifest] ||= ''
       opts[:node_def_name] ||= 'default'
-      master_certname = on(master, puppet('config print certname')).stdout.rstrip
+      master_certname = on(master_host, puppet('config print certname')).stdout.rstrip
 
       default_def = <<-MANIFEST
 node default {
@@ -71,9 +71,6 @@ MANIFEST
     #
     # set_perms_on_remote(master, "/tmp/test/site.pp", "777")
     def set_perms_on_remote(host, path, mode, opts = {})
-      opts[:owner] ||= nil
-      opts[:group] ||= nil
-
       if (opts[:owner].nil?)
         owner = on(host, puppet('config print user')).stdout.rstrip
       end
