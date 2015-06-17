@@ -80,7 +80,7 @@ MANIFEST
       end
 
       on(host, "chmod -R #{mode} #{path}")
-      on(host, "chown -R #{opts[:owner]}:#{opts[:group]} #{path}")
+      on(host, "chown -R #{owner}:#{group} #{path}")
     end
 
     # Inject temporary "site.pp" onto target host. This will also create
