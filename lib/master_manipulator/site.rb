@@ -71,13 +71,8 @@ MANIFEST
     #
     # set_perms_on_remote(master, "/tmp/test/site.pp", "777")
     def set_perms_on_remote(host, path, mode, opts = {})
-      if (opts[:owner].nil?)
-        owner = on(host, puppet('config print user')).stdout.rstrip
-      end
-
-      if (opts[:group].nil?)
-        group = on(host, puppet('config print group')).stdout.rstrip
-      end
+      opts[:owner] ||= on(host, puppet('config print user')).stdout.rstrip
+      opts[:group] ||= on(host, puppet('config print group')).stdout.rstrip
 
       on(host, "chmod -R #{mode} #{path}")
       on(host, "chown -R #{opts[:owner]}:#{opts[:group]} #{path}")
