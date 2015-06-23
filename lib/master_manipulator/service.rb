@@ -26,15 +26,15 @@ module MasterManipulator
       curl_call = "-I -k https://#{masterHostName}:8140/production/certificate_statuses/all"
 
       while i < opts[:time_out] do
-        sleep opts[:frequency]
         i += 1
         exit_code = curl_on(host, curl_call, :acceptable_exit_codes => [0,1,7]).exit_code
-
-        # Exit code 7 is "connection refused"
-        if exit_code != '7'
-          sleep 20
-          puts 'Restarting the Puppet Server was successful!'
-          return
+        case exit_code.to_s
+          when '0'
+            sleep 20
+            return 'Restarting the Puppet Server was successful!'
+          when '1' || '7'
+            # Exit code 7 is "connection refused"
+            sleep opts[:frequency]
         end
       end
 
