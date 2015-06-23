@@ -18,7 +18,7 @@ module MasterManipulator
       on(host, puppet('resource service pe-puppetserver ensure=stopped'))
       on(host, puppet('resource service pe-puppetserver ensure=running'))
       masterHostName = on(host, 'hostname').stdout.chomp
-      opts[:time_out] ||= 100
+      opts[:time_out] ||= 60
       opts[:frequency] ||= 5
       i = 0
 
