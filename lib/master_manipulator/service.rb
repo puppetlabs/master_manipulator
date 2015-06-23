@@ -23,7 +23,7 @@ module MasterManipulator
       i = 0
 
       # -k to ignore HTTPS error that isn't relevant to us
-      curl_call = "-I -k https://#{masterHostName}:8140/production/certificate_statuses/all"
+      curl_call = "-I -k https://#{masterHostName}:8140"
 
       while i < opts[:time_out] do
         i += 1
