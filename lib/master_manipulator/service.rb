@@ -38,7 +38,8 @@ module MasterManipulator
         end
       end
 
-      raise StandardError, 'Attempting to restart the puppet server was not successful in the time alloted.'
+      message = "Attempted to restart #{i} times, waited #{opts[:frequency]} seconds between attempts."
+      raise message
 
     end
 
