@@ -45,12 +45,24 @@ describe MasterManipulator::Service do
                                 x.exit_code = '7'
                                 x
                               }
+      let(:failed_curl_result)      { x = Beaker::Result.new('host', 'cmd')
+                                      x.stdout = 'This is stdout'
+                                      x.exit_code = '1'
+                                      x
+                                    }
 
       it 'puppet server never starts' do
         shared_dsl_expectations
         expect(dummy_class).to receive(:curl_on).exactly(10).times.and_return(beaker_result)
-        expect{ dummy_class.restart_puppet_server(beaker_host, {:time_out => 10}) }.to raise_error(StandardError, 'Attempting to restart the puppet server was not successful in the time alloted.')
+        expect{ dummy_class.restart_puppet_server(beaker_host, {:time_out => 10}) }.to raise_error(RuntimeError, "Attempted to restart 10 times, waited 5 seconds between attempts.")
       end
+
+      it 'should fail gracefully when curl fails' do
+        shared_dsl_expectations
+        expect(dummy_class).to receive(:curl_on).exactly(10).times.and_return(failed_curl_result)
+        expect{ dummy_class.restart_puppet_server(beaker_host, {:time_out => 10}) }.to raise_error(RuntimeError, "Attempted to restart 10 times, waited 5 seconds between attempts.")
+      end
+
     end
 
   end
