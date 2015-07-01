@@ -2,17 +2,17 @@ require 'spec_helper'
 
 describe MasterManipulator::Site do
 
-  let(:dummy_class) { Class.new { extend MasterManipulator::Site } }
-  let(:cmd_one)     {'config print certname'}
-  let(:host)        { instance_double(Beaker::Host) }
-  let(:result)      {
-                      x = Beaker::Result.new('host', 'cmd')
-                      x.stdout = 'This is stdout'
-                      x.exit_code = '0'
-                      x
-                    }
-  let(:command)     { instance_double(Beaker::Command) }
-  let(:manifest)    {
+  let(:dummy_class)     { Class.new { extend MasterManipulator::Site } }
+  let(:cmd_one)         {'config print certname'}
+  let(:host)            { instance_double(Beaker::Host) }
+  let(:result)          {
+                          x = Beaker::Result.new('host', 'cmd')
+                          x.stdout = 'This is stdout'
+                          x.exit_code = '0'
+                          x
+                        }
+  let(:command)         { instance_double(Beaker::Command) }
+  let(:manifest)        {
     pp =<<-EOS
 file{ '/etc/foo/bar.baz'
   ensure  => absent,
@@ -21,6 +21,60 @@ file{ '/etc/foo/bar.baz'
 EOS
   }
   let(:node_def_name)   {'skeletor'}
+  let(:env_name)        {'farts'}
+  let(:base_path)       {'This is stdout'}
+
+  describe '.get_manifests_path' do
+
+    it 'with all required arguements' do
+      expect(dummy_class).to receive(:on).with(host, command).and_return(result)
+      expect(dummy_class).to receive(:puppet).with('config print environmentpath').and_return(command)
+      r = dummy_class.get_manifests_path(host,{:env => env_name})
+      expect(r).to eq("#{base_path}/#{env_name}/manifests")
+    end
+
+    it 'without env' do
+      expect(dummy_class).to receive(:on).with(host, command).and_return(result)
+      expect(dummy_class).to receive(:puppet).with('config print environmentpath').and_return(command)
+      r = dummy_class.get_manifests_path(host)
+      expect(r).to eq("#{base_path}/production/manifests")
+    end
+
+    context 'negative' do
+
+      it 'with no arguements' do
+        expect{dummy_class.get_manifests_path}.to raise_error(ArgumentError)
+      end
+
+    end
+
+  end
+
+  describe '.get_site_pp_path' do
+
+    it 'with all required arguements' do
+      expect(dummy_class).to receive(:on).with(host, command).and_return(result)
+      expect(dummy_class).to receive(:puppet).with('config print environmentpath').and_return(command)
+      r = dummy_class.get_site_pp_path(host,{:env => env_name})
+      expect(r).to eq("#{base_path}/#{env_name}/manifests/site.pp")
+    end
+
+    it 'without env' do
+      expect(dummy_class).to receive(:on).with(host, command).and_return(result)
+      expect(dummy_class).to receive(:puppet).with('config print environmentpath').and_return(command)
+      r = dummy_class.get_site_pp_path(host)
+      expect(r).to eq("#{base_path}/production/manifests/site.pp")
+    end
+
+    context 'negative' do
+
+      it 'with no arguements' do
+        expect{dummy_class.get_site_pp_path}.to raise_error(ArgumentError)
+      end
+
+    end
+
+  end
 
   describe '.create_site_pp' do
 
@@ -47,8 +101,12 @@ EOS
       expect(r).to match(/node default {*\s}/m)
     end
 
-    it 'with no arguements' do
-      expect{dummy_class.create_site_pp}.to raise_error(ArgumentError)
+    context 'negative' do
+
+      it 'with no arguements' do
+        expect{dummy_class.create_site_pp}.to raise_error(ArgumentError)
+      end
+
     end
 
   end

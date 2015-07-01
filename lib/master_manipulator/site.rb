@@ -1,6 +1,48 @@
 module MasterManipulator
   module Site
 
+    # Get the location of an environment's manifests path. (Defaults to "production" environment.)
+    #
+    # ==== Attributes
+    #
+    # * +master_host+ - The master host that contains environments.
+    # * +opts:env+ - The environment from which to discover the manifests path.
+    #
+    # ==== Returns
+    #
+    # +string+ - An absolute path to the manifests for an environment on the master host.
+    #
+    # ==== Examples
+    #
+    # prod_env_manifests_path = get_manifests_path(master)
+    def get_manifests_path(master_host, opts = {})
+      opts[:env] ||= 'production'
+
+      environment_base_path = on(master_host, puppet('config print environmentpath')).stdout.rstrip
+
+      return File.join(environment_base_path, opts[:env], 'manifests')
+    end
+
+    # Get the location of an environment's "site.pp" path. (Defaults to "production" environment.)
+    #
+    # ==== Attributes
+    #
+    # * +master_host+ - The master host that contains environments.
+    # * +opts:env+ - The environment from which to discover the "site.pp" path.
+    #
+    # ==== Returns
+    #
+    # +string+ - An absolute path to the "site.pp" for an environment on the master host.
+    #
+    # ==== Examples
+    #
+    # prod_env_site_pp_path = get_site_pp_path(master)
+    def get_site_pp_path(master_host, opts = {})
+      opts[:env] ||= 'production'
+
+      return File.join(get_manifests_path(master_host, opts), 'site.pp')
+    end
+
     # Create a "site.pp" file with file bucket enabled. Also, allow
     # the creation of a custom node definition or use the 'default'
     # node definition.
@@ -17,7 +59,7 @@ module MasterManipulator
     #
     # ==== Examples
     #
-    # site_pp = create_site_pp(master_host, '', node_def_name='agent')
+    # site_pp = create_site_pp(master, '', node_def_name='agent')
     def create_site_pp(master_host, opts = {})
       opts[:manifest] ||= ''
       opts[:node_def_name] ||= 'default'
@@ -78,8 +120,7 @@ MANIFEST
       on(host, "chown -R #{opts[:owner]}:#{opts[:group]} #{path}")
     end
 
-    # Inject temporary "site.pp" onto target host. This will also create
-    # a "modules" folder in the target remote directory.
+    # Inject a "site.pp" manifest onto a master.
     #
     # ==== Attributes
     #
@@ -98,7 +139,7 @@ MANIFEST
       site_pp_dir = File.dirname(site_pp_path)
       create_remote_file(master_host, site_pp_path, manifest)
 
-      set_perms_on_remote(master_host, site_pp_dir, "777")
+      set_perms_on_remote(master_host, site_pp_dir, '644')
     end
 
   end
