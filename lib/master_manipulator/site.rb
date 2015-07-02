@@ -139,7 +139,7 @@ MANIFEST
       site_pp_dir = File.dirname(site_pp_path)
       create_remote_file(master_host, site_pp_path, manifest)
 
-      set_perms_on_remote(master_host, site_pp_dir, '644')
+      set_perms_on_remote(master_host, site_pp_dir, '744')
     end
 
   end
