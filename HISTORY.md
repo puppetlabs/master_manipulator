@@ -1,11 +1,35 @@
 # default - History
 ## Tags
-* [LATEST - 30 Jun, 2015 (53e5d02b)](#LATEST)
+* [LATEST - 1 Jul, 2015 (14ceb0e8)](#LATEST)
+* [1.1.0 - 30 Jun, 2015 (c33bac06)](#1.1.0)
 * [1.0.1 - 17 Jun, 2015 (33c2182d)](#1.0.1)
 * [1.0.0 - 6 May, 2015 (8ae50d90)](#1.0.0)
 
 ## Details
-### <a name = "LATEST">LATEST - 30 Jun, 2015 (53e5d02b)
+### <a name = "LATEST">LATEST - 1 Jul, 2015 (14ceb0e8)
+
+* (GEM) update master_manipulator version to 1.1.1 (14ceb0e8)
+
+* Merge pull request #10 from cowofevil/bug/master/QA-1935/fix_perms_on_site_pp (ebb0e478)
+
+
+```
+Merge pull request #10 from cowofevil/bug/master/QA-1935/fix_perms_on_site_pp
+
+(QA-1935) Fix "inject_site_pp" Issue
+```
+* (QA-1935) Fix "inject_site_pp" Issue (338a6d40)
+
+
+```
+(QA-1935) Fix "inject_site_pp" Issue
+
+The wrong mode was being set on the "site.pp" which made Puppet unable
+to read the file.
+```
+### <a name = "1.1.0">1.1.0 - 30 Jun, 2015 (c33bac06)
+
+* (HISTORY) update master_manipulator history for gem release 1.1.0 (c33bac06)
 
 * (GEM) update master_manipulator version to 1.1.0 (53e5d02b)
 
