@@ -1,12 +1,75 @@
 # default - History
 ## Tags
-* [LATEST - 1 Jul, 2015 (14ceb0e8)](#LATEST)
+* [LATEST - 29 Oct, 2015 (4be0bec7)](#LATEST)
+* [1.1.2 - 14 Jul, 2015 (13e5bb62)](#1.1.2)
+* [1.1.1 - 1 Jul, 2015 (42e15400)](#1.1.1)
 * [1.1.0 - 30 Jun, 2015 (c33bac06)](#1.1.0)
 * [1.0.1 - 17 Jun, 2015 (33c2182d)](#1.0.1)
 * [1.0.0 - 6 May, 2015 (8ae50d90)](#1.0.0)
 
 ## Details
-### <a name = "LATEST">LATEST - 1 Jul, 2015 (14ceb0e8)
+### <a name = "LATEST">LATEST - 29 Oct, 2015 (4be0bec7)
+
+* (GEM) update master_manipulator version to 1.2.0 (4be0bec7)
+
+* Merge pull request #13 from zreichert/improvement/master/QA-2115-use_status_enpoint (8ef7e82b)
+
+
+```
+Merge pull request #13 from zreichert/improvement/master/QA-2115-use_status_enpoint
+
+(QA-2115) use services endpoint for puppetserver
+```
+* (QA-2115) use services endpoint for puppetserver (ef2ebfc7)
+
+### <a name = "1.1.2">1.1.2 - 14 Jul, 2015 (13e5bb62)
+
+* Merge pull request #12 from mckern/master (13e5bb62)
+
+
+```
+Merge pull request #12 from mckern/master
+
+(MAINT) Bump version to 1.1.2 for first public release
+```
+* (MAINT) Bump version to 1.1.2 for first public release (8bd83fe9)
+
+* Merge pull request #11 from mckern/master (be4bf542)
+
+
+```
+Merge pull request #11 from mckern/master
+
+(MAINT) Prepare Gemspec for initial public release
+```
+* (MAINT) Prepare Gemspec for initial public release (0016defd)
+
+
+```
+(MAINT) Prepare Gemspec for initial public release
+
+Updated Gemspec to newer general Ruby and Rubygem standards
+(http://guides.rubygems.org/specification-reference/), which includes:
+
+Use single-quoted strings instead of double-string when interpolation
+isn't needed.
+
+Provide a slightly better description.
+
+Update the Gem author with the same 'author' as our other public gems.
+
+Correct OSI license name
+  (http://opensource.org/licenses/alphabetical).
+
+Use Ruby to generate the files to package, instead of shelling out to
+git on the command line.
+
+Removing attributes that are unused, like spec.executables and
+spec.require_paths (since it defaults to 'lib/').
+```
+### <a name = "1.1.1">1.1.1 - 1 Jul, 2015 (42e15400)
+
+* (HISTORY) update master_manipulator history for gem release 1.1.1 (42e15400)
 
 * (GEM) update master_manipulator version to 1.1.1 (14ceb0e8)
 
