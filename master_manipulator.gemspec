@@ -28,5 +28,6 @@ Gem::Specification.new do |spec|
 
   # Run time dependencies
   spec.add_runtime_dependency 'beaker', '~> 2.7', '>= 2.7.0'
-  spec.add_runtime_dependency 'json'
+  spec.add_runtime_dependency 'multi_json'
+
 end
