@@ -1,6 +1,7 @@
 # default - History
 ## Tags
-* [LATEST - 30 Oct, 2015 (a97f5458)](#LATEST)
+* [LATEST - 30 Oct, 2015 (58720b61)](#LATEST)
+* [1.2.1 - 30 Oct, 2015 (b59fd2cf)](#1.2.1)
 * [1.2.0 - 29 Oct, 2015 (6d0873f7)](#1.2.0)
 * [1.1.2 - 14 Jul, 2015 (13e5bb62)](#1.1.2)
 * [1.1.1 - 1 Jul, 2015 (42e15400)](#1.1.1)
@@ -9,7 +10,23 @@
 * [1.0.0 - 6 May, 2015 (8ae50d90)](#1.0.0)
 
 ## Details
-### <a name = "LATEST">LATEST - 30 Oct, 2015 (a97f5458)
+### <a name = "LATEST">LATEST - 30 Oct, 2015 (58720b61)
+
+* (GEM) update master_manipulator version to 1.2.2 (58720b61)
+
+* Merge pull request #15 from zreichert/update_json_require (b01919b7)
+
+
+```
+Merge pull request #15 from zreichert/update_json_require
+
+update json require
+```
+* update json require (8519e1ca)
+
+### <a name = "1.2.1">1.2.1 - 30 Oct, 2015 (b59fd2cf)
+
+* (HISTORY) update master_manipulator history for gem release 1.2.1 (b59fd2cf)
 
 * (GEM) update master_manipulator version to 1.2.1 (a97f5458)
 
