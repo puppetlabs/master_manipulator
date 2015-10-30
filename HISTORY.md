@@ -1,6 +1,7 @@
 # default - History
 ## Tags
-* [LATEST - 29 Oct, 2015 (4be0bec7)](#LATEST)
+* [LATEST - 30 Oct, 2015 (a97f5458)](#LATEST)
+* [1.2.0 - 29 Oct, 2015 (6d0873f7)](#1.2.0)
 * [1.1.2 - 14 Jul, 2015 (13e5bb62)](#1.1.2)
 * [1.1.1 - 1 Jul, 2015 (42e15400)](#1.1.1)
 * [1.1.0 - 30 Jun, 2015 (c33bac06)](#1.1.0)
@@ -8,7 +9,23 @@
 * [1.0.0 - 6 May, 2015 (8ae50d90)](#1.0.0)
 
 ## Details
-### <a name = "LATEST">LATEST - 29 Oct, 2015 (4be0bec7)
+### <a name = "LATEST">LATEST - 30 Oct, 2015 (a97f5458)
+
+* (GEM) update master_manipulator version to 1.2.1 (a97f5458)
+
+* Merge pull request #14 from zreichert/add_json_runtime_dependancy (9ff2c98f)
+
+
+```
+Merge pull request #14 from zreichert/add_json_runtime_dependancy
+
+(MAINT) add json runtime dependency
+```
+* (MAINT) add json runtime dependency (e07f7d39)
+
+### <a name = "1.2.0">1.2.0 - 29 Oct, 2015 (6d0873f7)
+
+* (HISTORY) update master_manipulator history for gem release 1.2.0 (6d0873f7)
 
 * (GEM) update master_manipulator version to 1.2.0 (4be0bec7)
 
