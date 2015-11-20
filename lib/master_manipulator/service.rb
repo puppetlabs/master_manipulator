@@ -27,7 +27,7 @@ module MasterManipulator
       hostname = on(host, 'hostname').stdout.chomp
       opts[:wait_cycles] ||= 10
 
-      pe_ver = host.host_hash[:pe_ver]
+      pe_ver = pe_version
       three_eight_regex = /^3\.8/
 
       # -k to ignore HTTPS error that isn't relevant to us
@@ -65,6 +65,25 @@ module MasterManipulator
 
       raise message
 
+    end
+
+    # Determine the version of PE installed on the master
+    #
+    # ==== Returns
+    #
+    # +string+ -The version of puppet enterprise, if version can not be determined 'version unknown' is returned
+    #
+    # ==== Examples
+    #
+    # pe_version
+    def pe_version
+      if on(master, 'test -f /opt/puppet/pe_version', :acceptable_exit_codes => [0,1]).exit_code == 0
+        return on(master, 'cat /opt/puppet/pe_version').stdout.chomp
+      elsif on(master, 'test -f /opt/puppetlabs/pe_version', :acceptable_exit_codes => [0,1]).exit_code == 0
+        return on(master, 'cat /opt/puppetlabs/pe_version').stdout.chomp
+      else
+        return 'version unknown'
+      end
     end
 
   end
