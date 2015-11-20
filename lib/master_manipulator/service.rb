@@ -27,10 +27,12 @@ module MasterManipulator
       hostname = on(host, 'hostname').stdout.chomp
       opts[:wait_cycles] ||= 10
 
-      pe_ver = pe_version
+      pe_ver = pe_version(host)
       three_eight_regex = /^3\.8/
 
-      # -k to ignore HTTPS error that isn't relevant to us
+      # This logic is not ideal refactor in the future
+      # if its PE and not 3.8 use the status endpoint
+      # it its not PE or it is 3.8 use the simple curl call
       if pe_ver && !pe_ver.match(three_eight_regex)
         curl_call = "-k -X GET -H 'Content-Type: application/json' https://#{hostname}:8140/status/v1/services?level=debug"
       else
@@ -69,6 +71,9 @@ module MasterManipulator
 
     # Determine the version of PE installed on the master
     #
+    # ==== Attributes
+    # *+host+ - the host that this should operate on
+    #
     # ==== Returns
     #
     # +string+ -The version of puppet enterprise, if version can not be determined 'version unknown' is returned
@@ -76,11 +81,11 @@ module MasterManipulator
     # ==== Examples
     #
     # pe_version
-    def pe_version
-      if on(master, 'test -f /opt/puppet/pe_version', :acceptable_exit_codes => [0,1]).exit_code == 0
-        return on(master, 'cat /opt/puppet/pe_version').stdout.chomp
-      elsif on(master, 'test -f /opt/puppetlabs/pe_version', :acceptable_exit_codes => [0,1]).exit_code == 0
-        return on(master, 'cat /opt/puppetlabs/pe_version').stdout.chomp
+    def pe_version(host)
+      if on(host, 'test -f /opt/puppet/pe_version', :acceptable_exit_codes => [0,1]).exit_code == 0
+        return on(host, 'cat /opt/puppet/pe_version').stdout.chomp
+      elsif on(host, 'test -f /opt/puppetlabs/server/pe_version', :acceptable_exit_codes => [0,1]).exit_code == 0
+        return on(host, 'cat /opt/puppetlabs/server/pe_version').stdout.chomp
       else
         return 'version unknown'
       end

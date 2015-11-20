@@ -20,20 +20,24 @@ describe MasterManipulator::Service do
 
   context 'compatibility with 3.8' do
 
-    def expect_host_hash
-      expect(beaker_host).to receive(:host_hash).and_return({:pe_ver => '3.8.3-a-3-asdf34245235'})
+    def expect_pe_version
+      result = Beaker::Result.new('host', 'cmd')
+      result.stdout = "3.8.8\n"
+
+      expect(dummy_class).to receive(:on).with(beaker_host, 'test -f /opt/puppet/pe_version', :acceptable_exit_codes => [0,1]).and_return(beaker_result)
+      expect(dummy_class).to receive(:on).with(beaker_host, 'cat /opt/puppet/pe_version').and_return(result)
     end
 
     describe '.restart_puppet_server' do
 
       let(:beaker_result)       { x = Beaker::Result.new('host', 'cmd')
       x.stdout = successful_stdout
-      x.exit_code = '0'
+      x.exit_code = 0
       x
       }
 
       it 'with correct required arguement' do
-        expect_host_hash
+        expect_pe_version
         shared_dsl_expectations
         expect(dummy_class).to receive(:curl_on).and_return(beaker_result)
         expect{dummy_class.restart_puppet_server(beaker_host)}.not_to raise_error
@@ -61,14 +65,14 @@ describe MasterManipulator::Service do
         }
 
         it 'puppet server never starts' do
-          expect_host_hash
+          expect_pe_version
           shared_dsl_expectations
           expect(dummy_class).to receive(:curl_on).exactly(3).times.and_return(beaker_no_connection_result)
           expect{ dummy_class.restart_puppet_server(beaker_host, {:wait_cycles => 3}) }.to raise_error(RuntimeError, /Attempted to restart 3 times, waited .* seconds total/)
         end
 
         it 'should fail gracefully when curl fails' do
-          expect_host_hash
+          expect_pe_version
           shared_dsl_expectations
           expect(dummy_class).to receive(:curl_on).exactly(3).times.and_return(failed_curl_result)
           expect{ dummy_class.restart_puppet_server(beaker_host, {:wait_cycles => 3}) }.to raise_error(RuntimeError, /Attempted to restart 3 times, waited .* seconds total/)
@@ -81,20 +85,28 @@ describe MasterManipulator::Service do
 
   context 'compatibility with Ankeny' do
 
-    def expect_host_hash
-      expect(beaker_host).to receive(:host_hash).and_return({:pe_ver => '2015.3.8-3-4-sf587441647'})
+    def expect_pe_version
+      result = Beaker::Result.new('host', 'cmd')
+      result.stdout = "2015.3.8-3-4-sf587441647\n"
+
+      failed_result = Beaker::Result.new('host', 'cmd')
+      failed_result.exit_code = 1
+
+      expect(dummy_class).to receive(:on).with(beaker_host, 'test -f /opt/puppet/pe_version', :acceptable_exit_codes => [0,1]).and_return(failed_result)
+      expect(dummy_class).to receive(:on).with(beaker_host, 'test -f /opt/puppetlabs/server/pe_version', :acceptable_exit_codes => [0,1]).and_return(beaker_result)
+      expect(dummy_class).to receive(:on).with(beaker_host, 'cat /opt/puppetlabs/server/pe_version').and_return(result)
     end
 
     describe '.restart_puppet_server' do
 
       let(:beaker_result)       { x = Beaker::Result.new('host', 'cmd')
                                   x.stdout = successful_stdout
-                                  x.exit_code = '0'
+                                  x.exit_code = 0
                                   x
                                 }
 
       it 'with correct required arguement' do
-        expect_host_hash
+        expect_pe_version
         shared_dsl_expectations
         expect(dummy_class).to receive(:curl_on).and_return(beaker_result)
         expect{dummy_class.restart_puppet_server(beaker_host)}.not_to raise_error
@@ -127,21 +139,21 @@ describe MasterManipulator::Service do
         }
 
         it 'puppet server never starts' do
-          expect_host_hash
+          expect_pe_version
           shared_dsl_expectations
           expect(dummy_class).to receive(:curl_on).exactly(3).times.and_return(beaker_no_connection_result)
           expect{ dummy_class.restart_puppet_server(beaker_host, {:wait_cycles => 3}) }.to raise_error(RuntimeError, /Attempted to restart 3 times, waited .* seconds total/)
         end
 
         it 'should fail gracefully when curl fails' do
-          expect_host_hash
+          expect_pe_version
           shared_dsl_expectations
           expect(dummy_class).to receive(:curl_on).exactly(3).times.and_return(failed_curl_result)
           expect{ dummy_class.restart_puppet_server(beaker_host, {:wait_cycles => 3}) }.to raise_error(RuntimeError, /Attempted to restart 3 times, waited .* seconds total/)
         end
 
         it 'should report the service that is not running' do
-          expect_host_hash
+          expect_pe_version
           shared_dsl_expectations
           expect(dummy_class).to receive(:curl_on).exactly(3).times.and_return(failed_state)
           expect{ dummy_class.restart_puppet_server(beaker_host, {:wait_cycles => 3}) }.to raise_error(RuntimeError, /'pe-master' state: foo/)
