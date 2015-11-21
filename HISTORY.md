@@ -1,6 +1,7 @@
 # default - History
 ## Tags
-* [LATEST - 30 Oct, 2015 (58720b61)](#LATEST)
+* [LATEST - 20 Nov, 2015 (b37806b8)](#LATEST)
+* [1.2.2 - 30 Oct, 2015 (31450d3c)](#1.2.2)
 * [1.2.1 - 30 Oct, 2015 (b59fd2cf)](#1.2.1)
 * [1.2.0 - 29 Oct, 2015 (6d0873f7)](#1.2.0)
 * [1.1.2 - 14 Jul, 2015 (13e5bb62)](#1.1.2)
@@ -10,7 +11,27 @@
 * [1.0.0 - 6 May, 2015 (8ae50d90)](#1.0.0)
 
 ## Details
-### <a name = "LATEST">LATEST - 30 Oct, 2015 (58720b61)
+### <a name = "LATEST">LATEST - 20 Nov, 2015 (b37806b8)
+
+* (GEM) update master_manipulator version to 1.2.3 (b37806b8)
+
+* Merge pull request #16 from zreichert/make_master_manipulator_3.8_compatible (9d2073ff)
+
+
+```
+Merge pull request #16 from zreichert/make_master_manipulator_3.8_compatible
+
+(QA-2182) make restart_puppet_server 3.8 compatible
+```
+* Address comments and fix spec tests (96d82bd4)
+
+* add method for determining pe_version (c2b9a957)
+
+* (QA-2182) make restart_puppet_server 3.8 compatible (9444b681)
+
+### <a name = "1.2.2">1.2.2 - 30 Oct, 2015 (31450d3c)
+
+* (HISTORY) update master_manipulator history for gem release 1.2.2 (31450d3c)
 
 * (GEM) update master_manipulator version to 1.2.2 (58720b61)
 
