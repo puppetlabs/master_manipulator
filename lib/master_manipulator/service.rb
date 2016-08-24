@@ -21,6 +21,10 @@ module MasterManipulator
     def restart_puppet_server(host, opts = {:is_pe? => true, :hup? => false})
       start_time = Time.now
 
+      if :hup?.class != TrueClass && :hup?.class != FalseClass
+        raise TypeError, ':hup? must be boolean (true/false)'
+      end
+
       opts[:is_pe?] ? service_name = 'pe-puppetserver' : service_name = 'puppetserver'
     
       if opts[:hup?]
