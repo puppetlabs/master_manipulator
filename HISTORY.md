@@ -1,6 +1,7 @@
 # default - History
 ## Tags
-* [LATEST - 20 Nov, 2015 (b37806b8)](#LATEST)
+* [1.9.99 - 23 Aug, 2016 (c28a7eee)](#LATEST)
+* [1.2.3 - 20 Nov, 2015 (b37806b8)](#1.2.3)
 * [1.2.2 - 30 Oct, 2015 (31450d3c)](#1.2.2)
 * [1.2.1 - 30 Oct, 2015 (b59fd2cf)](#1.2.1)
 * [1.2.0 - 29 Oct, 2015 (6d0873f7)](#1.2.0)
@@ -11,8 +12,21 @@
 * [1.0.0 - 6 May, 2015 (8ae50d90)](#1.0.0)
 
 ## Details
-### <a name = "LATEST">LATEST - 20 Nov, 2015 (b37806b8)
 
+### <a name = "LATEST">LATEST - 23 Aug, 2016 (b37806b8)
+
+(QA-2605) Extract FOSS puppetserver test libraries to master_manipulator 
+* Update Gemfile per TODO 
+* No, not that file 
+* Use the internal rubygems mirror 
+* Bump version number for new release 
+* Silence some warnings from gem build 
+* Additional methods and cleanup 
+* Add comments and documentation 
+* Fix calling conventions
+* Update HISTORY file
+
+### <a name="1.2.3">1.2.3 20 Nov, 2015 (b37806b8)
 * (GEM) update master_manipulator version to 1.2.3 (b37806b8)
 
 * Merge pull request #16 from zreichert/make_master_manipulator_3.8_compatible (9d2073ff)

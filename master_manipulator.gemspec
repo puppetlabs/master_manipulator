@@ -4,16 +4,16 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'master_manipulator/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'master_manipulator'
-  spec.version       = MasterManipulator::Version::STRING
-  spec.authors       = ['Puppet Labs']
-  spec.email         = ['qa@puppetlabs.com']
-  spec.summary       = 'Puppet Labs testing library for controlling a Puppet Master'
-  spec.description   = 'This Gem extends the Beaker DSL for the purpose of changing things on a Puppet Master.'
-  spec.homepage      = 'https://github.com/puppetlabs/master_manipulator'
-  spec.license       = 'Apache-2.0'
-  spec.files         = Dir['[A-Z]*[^~]'] + Dir['lib/**/*.rb'] + Dir['spec/*']
-  spec.test_files    = Dir['spec/*']
+  spec.name        = 'master_manipulator'
+  spec.version     = MasterManipulator::Version::STRING
+  spec.authors     = ['Puppet']
+  spec.email       = ['qa@puppet.com']
+  spec.summary     = 'Puppet testing library for controlling a Puppet Master'
+  spec.description = 'This Gem extends the Beaker DSL for the purpose of changing things on a Puppet Master.'
+  spec.homepage    = 'https://github.com/puppetlabs/master_manipulator'
+  spec.license     = 'Apache-2.0'
+  spec.files       = Dir['[A-Z]*[^~]'] + Dir['lib/**/*.rb'] + Dir['spec/*']
+  spec.test_files  = Dir['spec/*']
 
   # Development dependencies
   spec.add_development_dependency 'bundler', '~> 1.6'
