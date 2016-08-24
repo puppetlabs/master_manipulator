@@ -15,7 +15,7 @@ describe MasterManipulator::Service do
     expect(dummy_class).to receive(:on).with(beaker_host, beaker_command).twice
     expect(dummy_class).to receive(:puppet).with(cmd_1).and_return(beaker_command)
     expect(dummy_class).to receive(:puppet).with(cmd_2).and_return(beaker_command)
-    expect(dummy_class).to receive(:on).with(beaker_host, cmd_3).and_return(beaker_result)
+    expect(beaker_host).to receive(:hostname).and_return('foobar.puppetlabs.net')
   end
 
   context 'compatibility with 3.8' do
