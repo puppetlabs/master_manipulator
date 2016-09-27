@@ -1,6 +1,7 @@
 # default - History
 ## Tags
-* [LATEST - 20 Nov, 2015 (b37806b8)](#LATEST)
+* [LATEST - 27 Sep, 2016 (036a99e6)](#LATEST)
+* [1.2.3 - 20 Nov, 2015 (f31e884e)](#1.2.3)
 * [1.2.2 - 30 Oct, 2015 (31450d3c)](#1.2.2)
 * [1.2.1 - 30 Oct, 2015 (b59fd2cf)](#1.2.1)
 * [1.2.0 - 29 Oct, 2015 (6d0873f7)](#1.2.0)
@@ -11,7 +12,33 @@
 * [1.0.0 - 6 May, 2015 (8ae50d90)](#1.0.0)
 
 ## Details
-### <a name = "LATEST">LATEST - 20 Nov, 2015 (b37806b8)
+### <a name = "LATEST">LATEST - 27 Sep, 2016 (036a99e6)
+
+* (GEM) update master_manipulator version to 1.2.4 (036a99e6)
+
+* Merge pull request #19 from tvpartytonight/maint_relax_beaker_dep (ecf8be2e)
+
+
+```
+Merge pull request #19 from tvpartytonight/maint_relax_beaker_dep
+
+(maint) Relax beaker dependency version
+```
+* (maint) Relax beaker dependency version (1f3bf5ad)
+
+* Merge pull request #17 from kurtwall/fix-perms (ac25ff24)
+
+
+```
+Merge pull request #17 from kurtwall/fix-perms
+
+(MAINT) Remove execute bit from all files
+```
+* (MAINT) Remove execute bit from all files (e8839cbf)
+
+### <a name = "1.2.3">1.2.3 - 20 Nov, 2015 (f31e884e)
+
+* (HISTORY) update master_manipulator history for gem release 1.2.3 (f31e884e)
 
 * (GEM) update master_manipulator version to 1.2.3 (b37806b8)
 
