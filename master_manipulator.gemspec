@@ -27,7 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'markdown', '~> 0'
 
   # Run time dependencies
-  spec.add_runtime_dependency 'beaker', '~> 2.7', '>= 2.7.0'
+  spec.add_runtime_dependency 'beaker', '>= 2.7.0'
   spec.add_runtime_dependency 'multi_json'
 
 end
