@@ -36,18 +36,18 @@ describe MasterManipulator::Service do
       x
       }
 
-      it 'with correct required arguement' do
+      it 'with correct required argument' do
         expect_pe_version
         shared_dsl_expectations
         expect(dummy_class).to receive(:curl_on).and_return(beaker_result)
         expect{dummy_class.restart_puppet_server(beaker_host)}.not_to raise_error
       end
 
-      it 'with too many arguements' do
+      it 'with too many arguments' do
         expect{ dummy_class.restart_puppet_server(beaker_host, {}, 'No Bueno') }.to raise_error(ArgumentError)
       end
 
-      it 'with no arguements' do
+      it 'with no arguments' do
         expect{ dummy_class.restart_puppet_server }.to raise_error(ArgumentError)
       end
 
@@ -105,18 +105,18 @@ describe MasterManipulator::Service do
                                   x
                                 }
 
-      it 'with correct required arguement' do
+      it 'with correct required argument' do
         expect_pe_version
         shared_dsl_expectations
         expect(dummy_class).to receive(:curl_on).and_return(beaker_result)
         expect{dummy_class.restart_puppet_server(beaker_host)}.not_to raise_error
       end
 
-      it 'with too many arguements' do
+      it 'with too many arguments' do
         expect{ dummy_class.restart_puppet_server(beaker_host, {}, 'No Bueno') }.to raise_error(ArgumentError)
       end
 
-      it 'with no arguements' do
+      it 'with no arguments' do
         expect{ dummy_class.restart_puppet_server }.to raise_error(ArgumentError)
       end
 

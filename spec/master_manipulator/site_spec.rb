@@ -26,7 +26,7 @@ EOS
 
   describe '.get_manifests_path' do
 
-    it 'with all required arguements' do
+    it 'with all required arguments' do
       expect(dummy_class).to receive(:on).with(host, command).and_return(result)
       expect(dummy_class).to receive(:puppet).with('config print environmentpath').and_return(command)
       r = dummy_class.get_manifests_path(host,{:env => env_name})
@@ -42,7 +42,7 @@ EOS
 
     context 'negative' do
 
-      it 'with no arguements' do
+      it 'with no arguments' do
         expect{dummy_class.get_manifests_path}.to raise_error(ArgumentError)
       end
 
@@ -52,7 +52,7 @@ EOS
 
   describe '.get_site_pp_path' do
 
-    it 'with all required arguements' do
+    it 'with all required arguments' do
       expect(dummy_class).to receive(:on).with(host, command).and_return(result)
       expect(dummy_class).to receive(:puppet).with('config print environmentpath').and_return(command)
       r = dummy_class.get_site_pp_path(host,{:env => env_name})
@@ -68,7 +68,7 @@ EOS
 
     context 'negative' do
 
-      it 'with no arguements' do
+      it 'with no arguments' do
         expect{dummy_class.get_site_pp_path}.to raise_error(ArgumentError)
       end
 
@@ -78,7 +78,7 @@ EOS
 
   describe '.create_site_pp' do
 
-    it 'with all required arguements' do
+    it 'with all required arguments' do
       expect(dummy_class).to receive(:on).with(host, command).and_return(result)
       expect(dummy_class).to receive(:puppet).with(cmd_one).and_return(command)
       r = dummy_class.create_site_pp(host,{:manifest => manifest, :node_def_name => node_def_name})
@@ -103,7 +103,7 @@ EOS
 
     context 'negative' do
 
-      it 'with no arguements' do
+      it 'with no arguments' do
         expect{dummy_class.create_site_pp}.to raise_error(ArgumentError)
       end
 
@@ -118,7 +118,7 @@ EOS
     let(:mode)  {'777'}
     let(:path)  {'/my_fun_path/totally/real/'}
 
-    it 'with all arguements' do
+    it 'with all arguments' do
       opts = {:owner => owner, :group => group}
       expect(dummy_class).to receive(:on).exactly(2).times.and_return(result)
       expect{dummy_class.set_perms_on_remote(host, path, mode, opts)}.not_to raise_error
@@ -147,7 +147,7 @@ EOS
 
     context 'negative' do
 
-      it 'with no arguements' do
+      it 'with no arguments' do
         expect{dummy_class.set_perms_on_remote}.to raise_error(ArgumentError)
       end
 
@@ -159,7 +159,7 @@ EOS
 
     let(:site_pp_path)    {'/etc/puppet/fake/dir/site.pp'}
 
-    it 'with all correct arguements' do
+    it 'with all correct arguments' do
       expect(dummy_class).to receive(:create_remote_file)
       expect(dummy_class).to receive(:on).exactly(4).times.and_return(result)
       expect(dummy_class).to receive(:puppet).with('config print user')
@@ -169,7 +169,7 @@ EOS
 
     context 'negative' do
 
-      it 'with no arguements' do
+      it 'with no arguments' do
         expect{ dummy_class.inject_site_pp }.to raise_error(ArgumentError)
       end
 
