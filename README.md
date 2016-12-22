@@ -1,8 +1,7 @@
-
 # Master Manipulator
 
 This gem extends the Beaker DSL for the purpose of changing things on a
-Puppet master.
+Puppet master
 
 ## Installation
 

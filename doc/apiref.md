@@ -1,4 +1,4 @@
-# Master Manipulator API Summary, v1.2.4
+# Master Manipulator API Summary, v1
 
 Before trying to use the APIs described in this document, please
 make sure you have installed the Master Manipulator gem as described
@@ -47,7 +47,7 @@ process to force reloading configuration files. See
     restart_puppet_server(master)
     ```
 
-### `get_manifests_path`
+### `get_manifests_path(host)`
 
 Returns the path to the manifests folder for an environment on a
 master.
@@ -64,7 +64,7 @@ master.
     stage_env_manifests_path = get_manifests_path(master, :env => 'staging')
     ```
 
-### `get_site_pp_path`
+### `get_site_pp_path(host)`
 
 Returns the path to the site.pp manifest for an environment on a
 master.
@@ -80,7 +80,7 @@ master.
     stage_env_site_pp_path = get_site_pp_path(master, :env => 'staging')
     ```
 
-### `create_site_pp`
+### `create_site_pp(host, manifest)`
 
 Creates a site.pp file with file bucket enabled. Supports the
 creation of a custom node definition or use the 'default' node
@@ -97,7 +97,7 @@ definition.
     site_pp = create_site_pp(master, :node_def_name => 'puppet_agent', :manifest => 'notify { hello: }')
     ```
 
-### `set_perms_on_remote`
+### `set_perms_on_remote(host, path, mode)`
 
 Sets permissions and ownership on a remote file.
 
@@ -113,7 +113,7 @@ Sets permissions and ownership on a remote file.
     set_perms_on_remote(master, get_site_pp_path(master), '644', :owner => 'root', :group => 'root')
     ```
     
-### `inject_site_pp`
+### `inject_site_pp(host, path, manifest)`
 
 Injects a site.pp manifest onto a master.
 
