@@ -3,18 +3,16 @@ require 'json'
 module MasterManipulator
   module Service
 
-    # Restart the puppet server and wait for it to come back up
-    # ==== Attributes
-    # *+host+ - the host that this should operate on
-    # *+opts+ - an options hash - not required
-    #   *+:wait_cycle+ - the number of cycles to attempt retry
-    #   *+:is_pe?+ - Boolean : if the SUT is PE, defaults to true
-    #
+    # Restart the puppet server and wait for it to come back up.
     # Raises a standard error if the wait is unsuccessful
-    #
-    # ==== Example
-    # restart_puppet_server(master)
-    # restart_puppet_server(master, {:wait_cycles => 20})
+    # ==== Attributes
+    # @param [Beaker::Host] host the host that this should operate on
+    # @param [Hash] opts an optional options hash
+    #   *+:wait_cycles+ - the number of cycles to attempt retry
+    #   *+:is_pe?+ - Boolean : if the SUT is PE, defaults to true
+    # @return Nothing
+    # @example restart_puppet_server(master)
+    # @example restart_puppet_server(master, {:wait_cycles => 20})
     def restart_puppet_server(host, opts = {})
 
       start_time = Time.now
@@ -40,7 +38,6 @@ module MasterManipulator
       end
 
       (1..opts[:wait_cycles]).each do |i|
-
         @result = curl_on(host, curl_call, :acceptable_exit_codes => [0,1,7])
         # parse body if we are using PE and we are not in PE 3.8
         (pe_ver && !pe_ver.match(three_eight_regex)) ? @body = JSON.parse(@result.stdout) : @body = []
@@ -56,31 +53,20 @@ module MasterManipulator
       end
 
       total_time = Time.now - start_time
-
       message = "Attempted to restart #{opts[:wait_cycles]} times, waited #{total_time} seconds total."
-
       message << "\nHere is the status reported by the puppetserver'"
 
       @body.each do |k,v|
         message << "\n'#{k}' state: #{v['state']} "
       end
-
       raise message
 
     end
 
     # Determine the version of PE installed on the master
-    #
-    # ==== Attributes
-    # *+host+ - the host that this should operate on
-    #
-    # ==== Returns
-    #
-    # +string+ -The version of puppet enterprise, if version can not be determined 'version unknown' is returned
-    #
-    # ==== Examples
-    #
-    # pe_version
+    # @param [Beaker::Host] host the host that this should operate on
+    # @return [String] the version of puppet enterprise, if version can not be determined 'version unknown' is returned
+    # ver = pe_version
     def pe_version(host)
       if on(host, 'test -f /opt/puppet/pe_version', :acceptable_exit_codes => [0,1]).exit_code == 0
         return on(host, 'cat /opt/puppet/pe_version').stdout.chomp
