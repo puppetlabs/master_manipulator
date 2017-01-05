@@ -10,7 +10,8 @@ module MasterManipulator
     #   prod_env_manifests_path = get_manifests_path(master)
     # @example Get the manifests path for the testing environment on master
     #   test_env_manifests_path = get_manifests_path(master, {:env => 'test'})
-    def get_manifests_path(master_host, opts = {:env => 'production'})
+    def get_manifests_path(master_host, opts = {})
+      opts[:env] ||= 'production'
       environment_base_path = on(master_host, puppet('config print environmentpath')).stdout.rstrip
 
       return File.join(environment_base_path, opts[:env], 'manifests')
@@ -25,7 +26,8 @@ module MasterManipulator
     #   prod_env_site_pp_path = get_site_pp_path(master)
     # @example Return the path to the site.pp file for the testing environment on master
     #   prod_env_site_pp_path = get_site_pp_path(master, {:env => 'testing'})
-    def get_site_pp_path(master_host, opts = {:env => 'production'})
+    def get_site_pp_path(master_host, opts = {})
+      opts[:env] ||= 'production'
 
       return File.join(get_manifests_path(master_host, opts), 'site.pp')
     end
@@ -44,7 +46,9 @@ module MasterManipulator
     #   site_pp = create_site_pp(master, {:node_def_name => 'mailgrunt'})
     # @example Create a site.pp on master for a node named 'mailgrunt' with a custom node definition in the manifest
     #   site_pp = create_site_pp(master, {:manifest => manifest_for_mailgrunt, :node_def_name => 'mailgrunt'})
-    def create_site_pp(master_host, opts = {:manifest => '', :node_def_name => 'default'})
+    def create_site_pp(master_host, opts = {})
+      opts[:manifest] ||= ''
+      opts[:node_def_name] ||= 'default'
       master_certname = on(master_host, puppet('config print certname')).stdout.rstrip
 
       default_def = <<-MANIFEST
@@ -92,7 +96,7 @@ MANIFEST
     #   set_perms_on_remote(master, '/tmp/this_is_junk.pp', '0644', {:user => 'tommy')
     # @example Set perms on a file on master with a custom user and a custom group
     #   set_perms_on_remote(master, '/tmp/this_is_junk.pp', '0644', {:user => 'tommy', :group => 'tutones')
-    def set_perms_on_remote(master_host, path, mode, opts = {:owner => 'puppet', :group => 'puppet'})
+    def set_perms_on_remote(master_host, path, mode, opts = {})
       opts[:owner] ||= on(master_host, puppet('config print user')).stdout.rstrip
       opts[:group] ||= on(master_host, puppet('config print group')).stdout.rstrip
 

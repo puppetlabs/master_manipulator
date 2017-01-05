@@ -18,11 +18,11 @@ module MasterManipulator
     #   restart_puppet_server(master, {:wait_cycles => 20})
     # @example Restart the puppetserver process on a FOSS master, timing out after 20 attempts
     #   restart_puppet_server(master, {:is_pe? => false, :wait_cycles => 20})
-    def restart_puppet_server(master_host, opts = {:is_pe? => true, :wait_cycles => 10})
+    def restart_puppet_server(master_host, opts = {})
 
       start_time = Time.now
 
-      # opts[:is_pe?] ||= true
+      opts[:is_pe?] ||= true
       opts[:is_pe?] ? service_name = 'pe-puppetserver' : service_name = 'puppetserver'
 
       on(master_host, puppet("resource service #{service_name} ensure=stopped"))
