@@ -1,6 +1,7 @@
 # default - History
 ## Tags
-* [LATEST - 27 Sep, 2016 (036a99e6)](#LATEST)
+* [LATEST - 06 Jan, 2016 (36910dd)](#LATEST)
+* [1.2.4 - 27 Sep, 2016 (036a99e6)](#1.2.4)
 * [1.2.3 - 20 Nov, 2015 (f31e884e)](#1.2.3)
 * [1.2.2 - 30 Oct, 2015 (31450d3c)](#1.2.2)
 * [1.2.1 - 30 Oct, 2015 (b59fd2cf)](#1.2.1)
@@ -12,7 +13,28 @@
 * [1.0.0 - 6 May, 2015 (8ae50d90)](#1.0.0)
 
 ## Details
-### <a name = "LATEST">LATEST - 27 Sep, 2016 (036a99e6)
+### <a name = "LATEST">LATEST - 06 Jan, 2016 (36910dd)
+* Fix spec failures (36910dd)
+
+* Various cleanups ahead of a 1.2.5 release (fdf54a2)
+
+* Merge pull request #22 from kurtwall/seed-the-yard (49f6ca5)
+
+* Merge https://github.com/puppetlabs/master_manipulator into seed-the-yard (38cb146)
+
+* Merge pull request #21 from kurtwall/update-readme (1d75e90)
+
+* Start the initial conversion to YARD (169b575)
+
+* Update README.md (2159ad7)
+
+* (QA-2789) Revise Master Manipulator docs (fc5cae8)
+
+* Merge pull request #20 from kurtwall/fix-typo (eff5cdf)
+
+* (MAINT) Fix typo (d3a6306)
+
+### <a name = "1.2.4">1.2.4 - 27 Sep, 2016 (036a99e6)
 
 * (GEM) update master_manipulator version to 1.2.4 (036a99e6)
 

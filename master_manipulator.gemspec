@@ -6,10 +6,10 @@ require 'master_manipulator/version'
 Gem::Specification.new do |spec|
   spec.name          = 'master_manipulator'
   spec.version       = MasterManipulator::Version::STRING
-  spec.authors       = ['Puppet Labs']
-  spec.email         = ['qa@puppetlabs.com']
-  spec.summary       = 'Puppet Labs testing library for controlling a Puppet Master'
-  spec.description   = 'This Gem extends the Beaker DSL for the purpose of changing things on a Puppet Master.'
+  spec.authors       = ['Puppet, Inc.']
+  spec.email         = ['qa@puppet.com']
+  spec.summary       = 'Puppet test library for modifying a Puppet master'
+  spec.description   = 'This gem extends the Beaker DSL for the purpose of changing things on a Puppet master'
   spec.homepage      = 'https://github.com/puppetlabs/master_manipulator'
   spec.license       = 'Apache-2.0'
   spec.files         = Dir['[A-Z]*[^~]'] + Dir['lib/**/*.rb'] + Dir['spec/*']
@@ -29,5 +29,4 @@ Gem::Specification.new do |spec|
   # Run time dependencies
   spec.add_runtime_dependency 'beaker', '>= 2.7.0'
   spec.add_runtime_dependency 'multi_json'
-
 end
