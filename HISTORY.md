@@ -1,8 +1,7 @@
 # default - History
 ## Tags
-* [LATEST - 10 Jan, 2016 (cd46a32)](#LATEST)
-* [1.2.5 - 06 Jan, 2016 (36910dd)](#1.2.5)
-* [1.2.4 - 27 Sep, 2016 (036a99e6)](#1.2.4)
+* [LATEST - 10 Jan, 2017 (e3ff6153)](#LATEST)
+* [1.2.4 - 27 Sep, 2016 (48017488)](#1.2.4)
 * [1.2.3 - 20 Nov, 2015 (f31e884e)](#1.2.3)
 * [1.2.2 - 30 Oct, 2015 (31450d3c)](#1.2.2)
 * [1.2.1 - 30 Oct, 2015 (b59fd2cf)](#1.2.1)
@@ -14,33 +13,81 @@
 * [1.0.0 - 6 May, 2015 (8ae50d90)](#1.0.0)
 
 ## Details
-### <a name = "LATEST">LATEST - 10 Jan, 2016 (36910dd)
-* Update HISTORY.md (cd46a32), push tag
+### <a name = "LATEST">LATEST - 10 Jan, 2017 (e3ff6153)
 
-### <a name = "LATEST">LATEST - 06 Jan, 2016 (36910dd)
-* (GEM) update master_manipulator version to 1.2.5 (36910dd)
+* (GEM) update master_manipulator version to 1.2.6 (e3ff6153)
 
-* Fix spec failures (36910dd)
+* Merge pull request #25 from kurtwall/release-gem (838e4850)
 
-* Various cleanups ahead of a 1.2.5 release (fdf54a2)
 
-* Merge pull request #22 from kurtwall/seed-the-yard (49f6ca5)
+```
+Merge pull request #25 from kurtwall/release-gem
 
-* Merge https://github.com/puppetlabs/master_manipulator into seed-the-yard (38cb146)
+(GEM) Release 1.2.5 gem
+```
+* (GEM) Release 1.2.5 gem (b6a81655)
 
-* Merge pull request #21 from kurtwall/update-readme (1d75e90)
+* Merge pull request #24 from kurtwall/fix-apiref (cd46a323)
 
-* Start the initial conversion to YARD (169b575)
 
-* Update README.md (2159ad7)
+```
+Merge pull request #24 from kurtwall/fix-apiref
 
-* (QA-2789) Revise Master Manipulator docs (fc5cae8)
+(QA-2812) API ref missing #pe_version method
+```
+* (QA-2812) API ref missing #pe_version method (4f718a04)
 
-* Merge pull request #20 from kurtwall/fix-typo (eff5cdf)
+* Merge pull request #23 from kurtwall/release-gem (6f2f8ed9)
 
-* (MAINT) Fix typo (d3a6306)
 
-### <a name = "1.2.4">1.2.4 - 27 Sep, 2016 (036a99e6)
+```
+Merge pull request #23 from kurtwall/release-gem
+
+(maint) Fix YARD markup; modify a couple of variable names
+```
+* Update changelog (88fd7460)
+
+* Fix spec failures (36910dd8)
+
+* Various cleanups ahead of a 1.2.5 release (fdf54a20)
+
+* Merge pull request #22 from kurtwall/seed-the-yard (49f6ca54)
+
+
+```
+Merge pull request #22 from kurtwall/seed-the-yard
+
+(QA-2789) Convert API docs to use YARD markup
+```
+* Merge https://github.com/puppetlabs/master_manipulator into seed-the-yard (38cb1469)
+
+* Merge pull request #21 from kurtwall/update-readme (1d75e909)
+
+
+```
+Merge pull request #21 from kurtwall/update-readme
+
+(QA-2789) Revise Master Manipulator docs
+```
+* Start the initial conversion to YARD (169b5755)
+
+* Update README.md (2159ad76)
+
+* (QA-2789) Revise Master Manipulator docs (fc5cae87)
+
+* Merge pull request #20 from kurtwall/fix-typo (eff5cdf0)
+
+
+```
+Merge pull request #20 from kurtwall/fix-typo
+
+(MAINT) Fix typo
+```
+* (MAINT) Fix typo (d3a63069)
+
+### <a name = "1.2.4">1.2.4 - 27 Sep, 2016 (48017488)
+
+* (HISTORY) update master_manipulator history for gem release 1.2.4 (48017488)
 
 * (GEM) update master_manipulator version to 1.2.4 (036a99e6)
 
