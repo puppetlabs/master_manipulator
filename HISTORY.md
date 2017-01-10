@@ -1,6 +1,7 @@
 # default - History
 ## Tags
-* [LATEST - 06 Jan, 2016 (36910dd)](#LATEST)
+* [LATEST - 10 Jan, 2016 (cd46a32)](#LATEST)
+* [1.2.5 - 06 Jan, 2016 (36910dd)](#1.2.5)
 * [1.2.4 - 27 Sep, 2016 (036a99e6)](#1.2.4)
 * [1.2.3 - 20 Nov, 2015 (f31e884e)](#1.2.3)
 * [1.2.2 - 30 Oct, 2015 (31450d3c)](#1.2.2)
@@ -13,7 +14,12 @@
 * [1.0.0 - 6 May, 2015 (8ae50d90)](#1.0.0)
 
 ## Details
+### <a name = "LATEST">LATEST - 10 Jan, 2016 (36910dd)
+* Update HISTORY.md (cd46a32), push tag
+
 ### <a name = "LATEST">LATEST - 06 Jan, 2016 (36910dd)
+* (GEM) update master_manipulator version to 1.2.5 (36910dd)
+
 * Fix spec failures (36910dd)
 
 * Various cleanups ahead of a 1.2.5 release (fdf54a2)
