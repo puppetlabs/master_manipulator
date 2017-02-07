@@ -97,6 +97,30 @@ describe MasterManipulator::Service do
       expect(dummy_class).to receive(:on).with(beaker_host, 'cat /opt/puppetlabs/server/pe_version').and_return(result)
     end
 
+    describe '.reload_puppet_server' do
+      let(:beaker_result) {
+        x = Beaker::Result.new('host', 'cmd')
+        x.stdout = successful_stdout
+        x.exit_code = 0
+        x
+      }
+
+      it 'with correct required argument' do
+        expect_pe_version
+        shared_dsl_expectations
+        expect(dummy_class).to receive(:curl_on).and_return(beaker_result)
+        expect{dummy_class.restart_puppet_server(beaker_host)}.not_to raise_error
+      end
+
+      it 'with too many arguments' do
+        expect{ dummy_class.restart_puppet_server(beaker_host, {}, 'nolo contendere') }.to raise_error(ArgumentError)
+      end
+
+      it 'with no arguments' do
+        expect{ dummy_class.restart_puppet_server }.to raise_error(ArgumentError)
+      end
+    end
+
     describe '.restart_puppet_server' do
 
       let(:beaker_result)       { x = Beaker::Result.new('host', 'cmd')
