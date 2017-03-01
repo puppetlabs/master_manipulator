@@ -134,3 +134,15 @@ Sets permissions and ownership on a remote file.
     set_perms_on_remote(master, get_site_pp_path(master), '644', :owner => 'root', :group => 'root')
     ```
     
+
+### `rotate_puppet_server_log(host)`
+
+Performs a log file rotation on the puppetserver log file.  
+Intended to mimic what logback would do, which is a copy truncate.
+
+* Rotate the puppetserver log file on the master:
+
+    ```
+    rotate_puppet_server_log(master)
+    ```
+
