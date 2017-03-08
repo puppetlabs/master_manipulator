@@ -1,5 +1,5 @@
 module MasterManipulator
   module Version
-    STRING = '1.2.6'
+    STRING = '1.2.7'
   end
 end
