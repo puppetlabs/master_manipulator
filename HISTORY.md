@@ -1,6 +1,7 @@
-# default - History
+# worker - History
 ## Tags
-* [LATEST - 10 Jan, 2017 (e3ff6153)](#LATEST)
+* [LATEST - 8 Mar, 2017 (325436d0)](#LATEST)
+* [1.2.6 - 10 Jan, 2017 (866a03cb)](#1.2.6)
 * [1.2.4 - 27 Sep, 2016 (48017488)](#1.2.4)
 * [1.2.3 - 20 Nov, 2015 (f31e884e)](#1.2.3)
 * [1.2.2 - 30 Oct, 2015 (31450d3c)](#1.2.2)
@@ -13,7 +14,23 @@
 * [1.0.0 - 6 May, 2015 (8ae50d90)](#1.0.0)
 
 ## Details
-### <a name = "LATEST">LATEST - 10 Jan, 2017 (e3ff6153)
+### <a name = "LATEST">LATEST - 8 Mar, 2017 (325436d0)
+
+* (GEM) update master_manipulator version to 1.2.7 (325436d0)
+
+* Merge pull request #27 from RandellP/QA-2827 (90ddd470)
+
+
+```
+Merge pull request #27 from RandellP/QA-2827
+
+(QA-2827) added log rotation in a new module called log
+```
+* added log rotation in a new module called log (517159da)
+
+### <a name = "1.2.6">1.2.6 - 10 Jan, 2017 (866a03cb)
+
+* (HISTORY) update master_manipulator history for gem release 1.2.6 (866a03cb)
 
 * (GEM) update master_manipulator version to 1.2.6 (e3ff6153)
 
