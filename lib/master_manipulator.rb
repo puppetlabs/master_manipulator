@@ -3,11 +3,12 @@ require 'beaker'
 
 module Beaker
   class TestCase
-    %w( config service site ).each do |lib|
+    %w( config service site log ).each do |lib|
       require "master_manipulator/#{lib}"
     end
     include MasterManipulator::Config
     include MasterManipulator::Service
     include MasterManipulator::Site
+    include MasterManipulator::Log
   end
 end
