@@ -5,6 +5,6 @@ task :default => :test
 
 desc "Run spec tests"
 RSpec::Core::RakeTask.new(:test) do |t|
-  t.rspec_opts = ['--color']
+  t.rspec_opts = ['--color', '--format d']
   t.pattern = 'spec/'
 end

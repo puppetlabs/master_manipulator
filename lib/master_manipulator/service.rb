@@ -3,6 +3,26 @@ require 'json'
 module MasterManipulator
   module Service
 
+    # Reload puppetserver, causing it to reread its config without
+    # restarting the JVM. use this instead of restart_puppet_server 
+    # unless you absolutely have to stop and restart the server because
+    # JVM restarts are very expensive. This implementation relies on
+    # puppetserver's "reload" subcommand, which handles all the waiting
+    # for services to refresh. Older code using a forced HUP on the
+    # server process should be replaced with this.
+    # @param [Beaker::Host] master_host The host to manipulate.
+    # @param [Hash] opts Optional options hash containing options
+    # @return nil
+    # @example Restart the puppetserver process on a PE or FOSS master
+    #   restart_puppet_server(master)
+    def reload_puppet_server(master_host, opts = {})
+      # 2015.x (Everett) and newer
+      rc = on(master_host, "puppetserver reload", :accept_all_exit_codes => true)
+      if rc.exit_code != 0
+        raise "'puppetserver reload' failed, returned: #{rc.exit_code}"
+      end
+    end
+
     # Restart the puppet server and wait for it to come back up or raise
     # an error if the wait times out
     # @param [Beaker::Host] master_host The host to manipulate.
