@@ -2,20 +2,47 @@ require 'spec_helper'
 
 describe MasterManipulator::Service do
 
-  let(:beaker_host)           { instance_double(Beaker::Host) }
-  let(:beaker_command)        { instance_double(Beaker::Command) }
-  let(:dummy_class)           { Class.new { extend MasterManipulator::Service } }
-  let(:cmd_1)                 { 'resource service pe-puppetserver ensure=stopped' }
-  let(:cmd_2)                 { 'resource service pe-puppetserver ensure=running' }
-  let(:cmd_3)                 { 'hostname' }
-  let(:successful_stdout)     { IO.read(File.expand_path('spec/files/success_body.txt')) }
-  let(:failure_stdout)        { IO.read(File.expand_path('spec/files/failure.txt')) }
+  let(:beaker_host)       { instance_double(Beaker::Host) }
+  let(:beaker_command)    { instance_double(Beaker::Command) }
+  let(:dummy_class)       { Class.new { extend MasterManipulator::Service } }
+  let(:cmd_1)             { 'resource service pe-puppetserver ensure=stopped' }
+  let(:cmd_2)             { 'resource service pe-puppetserver ensure=running' }
+  let(:cmd_3)             { 'hostname' }
+  let(:successful_stdout) { IO.read(File.expand_path('spec/files/success_body.txt')) }
+  let(:failure_stdout)    { IO.read(File.expand_path('spec/files/failure.txt')) }
 
   def shared_dsl_expectations
     expect(dummy_class).to receive(:on).with(beaker_host, beaker_command).twice
     expect(dummy_class).to receive(:puppet).with(cmd_1).and_return(beaker_command)
     expect(dummy_class).to receive(:puppet).with(cmd_2).and_return(beaker_command)
     expect(dummy_class).to receive(:on).with(beaker_host, cmd_3).and_return(beaker_result)
+  end
+
+  describe '.reload_puppet_server' do
+
+    it 'successfully reloads puppetserver' do
+      success_result = Beaker::Result.new('host', 'puppetserver reload')
+      success_result.exit_code = 0
+
+      expect(dummy_class).to receive(:on).with(beaker_host, 'puppetserver reload', :accept_all_exit_codes => true).and_return(success_result)
+      expect { dummy_class.reload_puppet_server(beaker_host) }.not_to raise_error
+    end
+
+    it 'reports failure to reload puppetserver' do
+      failed_result = Beaker::Result.new('host', 'puppetserver reload')
+      failed_result.exit_code = 1
+
+      expect(dummy_class).to receive(:on).with(beaker_host, 'puppetserver reload', :accept_all_exit_codes => true).and_return(failed_result)
+      expect { dummy_class.reload_puppet_server(beaker_host) }.to raise_error(RuntimeError)
+    end
+
+    it 'rejects too many arguments' do
+      expect { dummy_class.reload_puppet_server(beaker_host, {}, '') }.to raise_error(ArgumentError)
+    end
+    
+    it 'rejects too few argument' do
+      expect { dummy_class.reload_puppet_server() }.to raise_error(ArgumentError)
+    end
   end
 
   context 'compatibility with 3.8' do

@@ -103,6 +103,19 @@ Returns the version of PE installed on the specified Puppet master as a string
     ver = pe_version(master)
     ```
 
+### `reload_puppet_server(host)`
+
+Reloads puppetserver to pick up changes made to puppet.conf and other 
+configuration files. *NOTE* This call does not restart the JVM. Rather
+it wraps the `puppetserver reload` subcommand and, as a result, is
+considerable faster than `restart_puppet_server` and should be used in
+place of it whenerver possible.
+
+* Reload puppetserver on the master:
+    ```
+    reload_puppet_server(master)
+    ```
+
 ### `restart_puppet_server(host)`
 
 Restarts the puppetserver service to pickup configuration changes
@@ -116,6 +129,17 @@ process to force reloading configuration files. See
 
     ```
     restart_puppet_server(master)
+    ```
+
+### `rotate_puppet_server_log(host)`
+
+Performs a log file rotation on the puppetserver log file.  
+Intended to mimic what logback would do, which is a copy truncate.
+
+* Rotate the puppetserver log file on the master:
+
+    ```
+    rotate_puppet_server_log(master)
     ```
 
 ### `set_perms_on_remote(host, path, mode)`
@@ -134,15 +158,4 @@ Sets permissions and ownership on a remote file.
     set_perms_on_remote(master, get_site_pp_path(master), '644', :owner => 'root', :group => 'root')
     ```
     
-
-### `rotate_puppet_server_log(host)`
-
-Performs a log file rotation on the puppetserver log file.  
-Intended to mimic what logback would do, which is a copy truncate.
-
-* Rotate the puppetserver log file on the master:
-
-    ```
-    rotate_puppet_server_log(master)
-    ```
 
