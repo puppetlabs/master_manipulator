@@ -1,6 +1,7 @@
 # worker - History
 ## Tags
-* [LATEST - 8 Mar, 2017 (325436d0)](#LATEST)
+* [LATEST - 15 Mar, 2017 (98f7b9fe)](#LATEST)
+* [1.2.7 - 8 Mar, 2017 (cb51b95b)](#1.2.7)
 * [1.2.6 - 10 Jan, 2017 (866a03cb)](#1.2.6)
 * [1.2.4 - 27 Sep, 2016 (48017488)](#1.2.4)
 * [1.2.3 - 20 Nov, 2015 (f31e884e)](#1.2.3)
@@ -14,7 +15,25 @@
 * [1.0.0 - 6 May, 2015 (8ae50d90)](#1.0.0)
 
 ## Details
-### <a name = "LATEST">LATEST - 8 Mar, 2017 (325436d0)
+### <a name = "LATEST">LATEST - 15 Mar, 2017 (98f7b9fe)
+
+* (GEM) update master_manipulator version to 2.0.0 (98f7b9fe)
+
+* Merge pull request #28 from kurtwall/add-reload-server (8d413112)
+
+
+```
+Merge pull request #28 from kurtwall/add-reload-server
+
+(QA-2367) Add a .reload_puppet_server method and spec tests
+```
+* Add method signature and short description to API quick reference (92aab7dc)
+
+* Add a .reload_puppet_server method and spec tests (dc24b159)
+
+### <a name = "1.2.7">1.2.7 - 8 Mar, 2017 (cb51b95b)
+
+* (HISTORY) update master_manipulator history for gem release 1.2.7 (cb51b95b)
 
 * (GEM) update master_manipulator version to 1.2.7 (325436d0)
 
