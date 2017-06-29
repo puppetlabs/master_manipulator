@@ -2,6 +2,16 @@
 module MasterManipulator
   module Log
 
+    # Return the path to the puppetserver log file
+    # @param [Beaker::Host] master_host The puppet server host
+    # @return [String] path to puppetserver log file
+    # @example return the path to the puppet server log file
+    #   puppet_server_log_path(master)
+    def puppet_server_log_path(master_host)
+      log_dir = on(master_host, puppet("master --configprint logdir")).stdout.chomp
+      "#{log_dir}/puppetserver.log"
+    end
+
     #<fileNamePattern>/var/log/puppetlabs/puppetserver/puppetserver-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
 
     # Rollover the puppetserver log file the same way logback would
@@ -11,9 +21,7 @@ module MasterManipulator
     #   rotate_puppet_server_log(master)
     def rotate_puppet_server_log(master_host)
 
-      log_dir = on(master_host, "puppet config print logdir").stdout.chomp
-      #this is ugly, rev 2 should parse the logback.xml, doesn't seem to be another way
-      log_file = log_dir + "server/puppetserver.log"
+      log_file = puppet_server_log_path(master_host)
 
       date_str = on(master_host, "date +%Y-%m-%d").stdout.chomp
       backup_log_file = log_file.sub(/\log$/,date_str)
