@@ -131,6 +131,17 @@ process to force reloading configuration files. See
     restart_puppet_server(master)
     ```
 
+### `puppet_server_log_path(host)`
+
+Returns the location of the puppetserver log file.
+
+* Return the path the puppetserver log file
+
+    ```
+    path = puppet_server_log_path(master)
+
+    ```
+
 ### `rotate_puppet_server_log(host)`
 
 Performs a log file rotation on the puppetserver log file.  
