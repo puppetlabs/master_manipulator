@@ -8,8 +8,10 @@ module MasterManipulator
     # @example return the path to the puppet server log file
     #   puppet_server_log_path(master)
     def puppet_server_log_path(master_host)
-      log_dir = on(master_host, puppet("master --configprint logdir")).stdout.chomp
-      "#{log_dir}/puppetserver.log"
+      # we use the "puppet config print logdir" to build the path, because "puppet master --configprint logdir" is
+      # set to the the puppet agent directory instead of the puppetserver, on some of the PE tests so we can't use it
+      log_dir = on(master_host, puppet("config print logdir")).stdout.chomp
+      "#{log_dir}server/puppetserver.log"
     end
 
     #<fileNamePattern>/var/log/puppetlabs/puppetserver/puppetserver-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>

@@ -6,10 +6,10 @@ describe MasterManipulator::Log do
   let(:beaker_host)                      { instance_double(Beaker::Host) }
   let(:beaker_command)                   { instance_double(Beaker::Command) }
   let(:dummy_class)                      { Class.new { extend MasterManipulator::Log} }
-  let(:log_dir)                          { "/tmp/MasterManipulator_Log/#{Process.pid}/puppetlabs/puppetserver" }
+  let(:log_dir)                          { "/tmp/MasterManipulator_Log/#{Process.pid}/puppetlabs/puppet" }
   let(:log_file)                         { "/tmp/MasterManipulator_Log/#{Process.pid}/puppetlabs/puppetserver/puppetserver.log" }
   let(:backup_log_file_base)             { "/tmp/MasterManipulator_Log/#{Process.pid}/puppetlabs/puppetserver/puppetserver.1976-07-04" }
-  let(:cmd_master_configprint_logdir)    { 'master --configprint logdir' }
+  let(:cmd_config_print_logdir)          { 'config print logdir' }
   let(:cmd_test_log_file)                { "test -f #{log_file}" }
   let(:cmd_date)                         { "date +%Y-%m-%d" }
   let(:cmd_test_backup_log_file_generic) { "test -f #{backup_log_file_base}.*" }
@@ -22,7 +22,7 @@ describe MasterManipulator::Log do
     log_result = Beaker::Result.new('host', 'cmd')
     log_result.stdout = log_dir
     expect(dummy_class).to receive(:on).with(beaker_host, beaker_command).and_return(log_result)
-    expect(dummy_class).to receive(:puppet).with(cmd_master_configprint_logdir).and_return(beaker_command)
+    expect(dummy_class).to receive(:puppet).with(cmd_config_print_logdir).and_return(beaker_command)
 
     date_result = Beaker::Result.new('host', 'cmd')
     date_result.stdout = "1976-07-04"
@@ -38,7 +38,7 @@ describe MasterManipulator::Log do
         log_dir_result = Beaker::Result.new('host', 'cmd')
         log_dir_result.stdout = log_dir
         expect(dummy_class).to receive(:on).with(beaker_host, beaker_command).and_return(log_dir_result)
-        expect(dummy_class).to receive(:puppet).with(cmd_master_configprint_logdir).and_return(beaker_command)
+        expect(dummy_class).to receive(:puppet).with(cmd_config_print_logdir).and_return(beaker_command)
         r = dummy_class.puppet_server_log_path(beaker_host)
         expect(r).to eq(log_file)
       end
