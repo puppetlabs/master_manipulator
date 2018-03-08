@@ -11,10 +11,10 @@ randell/master_manipulator:
     - source ~/.rvm/scripts/rvm
     - rvm install ruby-2.4.0
     - rvm use 2.4.0
-    - gem install bundle
+    - gem install bundler
 
   Build:
     - source ~/.rvm/scripts/rvm
     - rvm use 2.4.0
-    - bundle install --without development
+    - bundle install
     - bundle exec rake test
